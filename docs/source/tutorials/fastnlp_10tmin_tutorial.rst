@@ -288,7 +288,7 @@ fastNLP Trainer的伪代码逻辑
 
     ['raw_sentence', 'word_seq1', 'word_seq2', 'raw_label','label']
     通过
-        DataSet.set_input('word_seq1', word_seq2', flag=True)将'word_seq1', 'word_seq2'设置为input
+        DataSet.set_input('word_seq1', 'word_seq2', flag=True)将'word_seq1', 'word_seq2'设置为input
     通过
         DataSet.set_target('label', flag=True)将'label'设置为target
 
@@ -316,8 +316,8 @@ fastNLP Trainer的伪代码逻辑
            由于每个人写的Model.forward的output的dict可能key并不一样，比如有人是{'pred':xxx}, {'output': xxx}; 
            另外每个人将target可能也会设置为不同的名称, 比如有人是label, 有人设置为target；
         为了解决以上的问题，我们的loss提供映射机制
-           比如CrossEntropyLosser的需要的输入是(prediction, target)。但是forward的output是{'output': xxx}; 'label'是target
-           那么初始化losser的时候写为CrossEntropyLosser(prediction='output', target='label')即可
+           比如CrossEntropyLosser的需要的输入是(pred, target)。但是forward的output是{'output': xxx}; 'label'是target
+           那么初始化losser的时候写为CrossEntropyLosser(pred='output', target='label')即可
      (3) 对于Metric是同理的
          Metric计算也是从 forward的结果中取值 与 设置target的field中取值。 也是可以通过映射找到对应的值        
 
